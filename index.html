@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motivasi Kehidupan</title>
+<style>
+body, html {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.awan {
+  position: fixed;
+  width: 200%;
+  height: 100%;
+  background: url('https://i.ibb.co/1qbcPqM/cloud.png') repeat-x;
+  animation: awan 60s linear infinite;
+  opacity: 0.1;
+  z-index: 1;
+}
+@keyframes awan {
+  from {transform: translateX(0);}
+  to {transform: translateX(-50%);}
+}
+.typing {
+  overflow: hidden;
+  font-size: 22px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+#startBtn {
+  margin-top: 30px;
+  padding: 15px 30px;
+  font-size: 20px;
+  background: orange;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 3;
+  position: relative;
+}
+#startBtn:hover {
+  background: darkorange;
+}
+.rating {
+  display: none;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+  z-index: 3;
+}
+.rating span {
+  font-size: 40px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="awan"></div>
+<div class="typing" id="motivasi"></div>
+<button id="startBtn" onclick="startVideo()" style="display:none;">Lanjutkan Perjalanan</button><video id="video" style="display:none; width:100%; height:100%; object-fit:cover;" autoplay muted></video>
+
+<div class="rating" id="rating">
+  <span onclick="rate(1)">&#11088;</span>
+  <span onclick="rate(2)">&#11088;</span>
+  <span onclick="rate(3)">&#11088;</span>
+  <span onclick="rate(4)">&#11088;</span>
+  <span onclick="rate(5)">&#11088;</span>
+</div><script>
+let kata = "Kadang dalam hidup ini kita terlalu sibuk mengejar sesuatu... Sampai lupa caranya menikmati perjalanan... Tidak semua harus sempurna, tidak semua harus cepat, yang penting kamu terus berjalan.";
+let i = 0;
+function ketik() {
+  if(i < kata.length){
+    document.getElementById("motivasi").innerHTML += kata.charAt(i);
+    i++;
+    setTimeout(ketik, 50);
+  } else {
+    document.getElementById("startBtn").style.display = 'block';
+  }
+}
+
+ketik();
+
+function startVideo(){
+  document.getElementById("motivasi").style.display = 'none';
+  document.getElementById("startBtn").style.display = 'none';
+  let video = document.getElementById("video");
+  video.style.display = 'block';
+  video.src = "https://files.catbox.moe/xs4fjk.mp4";
+  video.muted = false;
+  video.play();
+
+  setTimeout(()=>{
+    document.getElementById("rating").style.display = 'flex';
+  },3000);
+}
+
+function rate(bintang){
+  let video = document.getElementById("video");
+  document.getElementById("rating").style.display = 'none';
+
+  if(bintang <= 3){
+    video.src = "https://files.catbox.moe/81xesu.mp4";
+    video.play();
+  } else {
+    video.play();
+  }
+}
+</script></body>
+</html>
